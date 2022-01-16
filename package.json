@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "lint-staged": "^12.1.7",
     "vue": "^3.2.8",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"
@@ -38,5 +39,11 @@
     "commitizen": {
       "path": "node_modules/cz-customizable"
     }
+  },
+  "lint-staged": {
+    "src/**/*.{js,vue}": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
