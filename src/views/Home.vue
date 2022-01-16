@@ -17,7 +17,7 @@ export default {
     },
 
     created() {
-        console.log('aaaa');
+        console.log('aaaaaa');
     }
 };
 </script>
