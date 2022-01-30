@@ -1,6 +1,6 @@
 <template>
     <div class="login-container">
-        <el-form class="login-form">
+        <el-form class="login-form" :model="loginForm" :rules="loginRules">
             <div class="title-container">
                 <h3 class="title">使用者登錄</h3>
             </div>
@@ -9,17 +9,29 @@
                 <span class="svg-container">
                     <svg-icon icon="user"></svg-icon>
                 </span>
-                <el-input placeholder="username" name="username" type="text"></el-input>
+                <el-input
+                    placeholder="username"
+                    name="username"
+                    v-model="loginForm.username"
+                    type="text"
+                ></el-input>
             </el-form-item>
             <!-- password -->
             <el-form-item prop="password">
                 <span class="svg-container">
                     <svg-icon icon="password"></svg-icon>
                 </span>
-                <el-input placeholder="password" name="password"></el-input>
-                <span class="show-pwd">
+                <el-input
+                    placeholder="password"
+                    name="password"
+                    :type="passwordType"
+                    v-model="loginForm.password"
+                ></el-input>
+                <span class="show-pwd" @click="onChangePwd">
                     <span class="svg-container">
-                        <svg-icon icon="eye"></svg-icon>
+                        <svg-icon
+                            :icon="passwordType === 'password' ? 'eye' : 'eye-open'"
+                        ></svg-icon>
                     </span>
                 </span>
             </el-form-item>
@@ -31,7 +43,43 @@
 </template>
 
 <script setup>
-import {} from 'vue';
+import { ref } from 'vue';
+import { validatePassword } from './rules';
+//數據源
+const loginForm = ref({
+    username: 'super-admin',
+    password: '123456'
+});
+
+// 驗證規則
+const loginRules = ref({
+    username: [
+        {
+            required: true,
+            trigger: 'blur',
+            message: '帳號為必填'
+        }
+    ],
+    password: [
+        {
+            required: true,
+            trigger: 'blur',
+            validator: validatePassword()
+        }
+    ]
+});
+
+//處理密碼框文字顯示
+const passwordType = ref('password');
+// passwordType的值需 text與password來回切換
+// 使用ref聲明的數據 script 必須加value來獲取具體值  html則否
+const onChangePwd = () => {
+    if (passwordType.value === 'password') {
+        passwordType.value = 'text';
+    } else {
+        passwordType.value = 'password';
+    }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -101,7 +149,6 @@ $cursor: #fff;
     .show-pwd {
         position: absolute;
         right: 10px;
-        top: 7px;
         font-size: 16px;
         color: $dark_gray;
         cursor: pointer;
