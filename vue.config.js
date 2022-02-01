@@ -5,6 +5,18 @@ function resolve(dir) {
 }
 
 module.exports = {
+    //webpack devServer 提供代理功能, 該功能 可將所有請求到當前server的請求代理到另外的一個server
+    devServer: {
+        //配置反向代理
+        proxy: {
+            // 當地址中有/api的時候會觸發代理機制
+            '/api': {
+                //要代理的server地址 這裡不用寫api
+                target: 'https://api.imooc-admin.lgdsunday.club/',
+                changeOrigin: true // 是否跨域
+            }
+        }
+    },
     chainWebpack(config) {
         //設置svg-sprite-loader
         //config為webpack配置對象

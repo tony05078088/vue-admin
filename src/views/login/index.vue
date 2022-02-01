@@ -1,6 +1,6 @@
 <template>
     <div class="login-container">
-        <el-form class="login-form" :model="loginForm" :rules="loginRules">
+        <el-form class="login-form" ref="loginFormRef" :model="loginForm" :rules="loginRules">
             <div class="title-container">
                 <h3 class="title">使用者登錄</h3>
             </div>
@@ -37,7 +37,13 @@
             </el-form-item>
 
             <!-- 登錄按鈕 -->
-            <el-button type="primary" style="width: 100%; margin-bottom: 30px">登錄</el-button>
+            <el-button
+                type="primary"
+                style="width: 100%; margin-bottom: 30px"
+                :loading="loading"
+                @click="handleLogin"
+                >登錄</el-button
+            >
         </el-form>
     </div>
 </template>
@@ -45,6 +51,7 @@
 <script setup>
 import { ref } from 'vue';
 import { validatePassword } from './rules';
+import { useStore } from 'vuex';
 //數據源
 const loginForm = ref({
     username: 'super-admin',
@@ -79,6 +86,29 @@ const onChangePwd = () => {
     } else {
         passwordType.value = 'password';
     }
+};
+// 處理登錄
+const loading = ref(false);
+const store = useStore();
+const loginFormRef = ref(null);
+const handleLogin = () => {
+    // 1.進行表單校驗
+    loginFormRef.value.validate(valid => {
+        if (!valid) return;
+        // 2.觸發登錄動作
+        loading.value = true;
+        store
+            .dispatch('user/login', loginForm.value)
+            .then(() => {
+                // 成功登錄
+                loading.value = false;
+                // 3.進行登錄後處理
+            })
+            .catch(err => {
+                loading.value = false;
+                console.log(err);
+            });
+    });
 };
 </script>
 
