@@ -8,6 +8,9 @@ import '@/styles/index.scss';
 // 導入svgIcon
 import installIcons from '@/icons';
 
+//導入路由鑑權
+import './permission';
+
 const app = createApp(App);
 installIcons(app);
 installElementPlus(app);
