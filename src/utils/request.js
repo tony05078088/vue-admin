@@ -5,8 +5,6 @@ const service = axios.create({
     timeout: 5000
 });
 
-console.log(service.baseURL);
-
 service.interceptors.request.use(config => {
     config.headers.icode = 'CAA36288C5993B52';
     return config;
