@@ -8,3 +8,12 @@ export const login = data => {
         data
     });
 };
+
+// 獲取用戶訊息 return promise
+
+export const getUserInfo = () => {
+    return request({
+        url: '/sys/profile',
+        method: 'get'
+    });
+};

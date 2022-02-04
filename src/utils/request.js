@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from '@/store';
 import { ElMessage } from 'element-plus';
 const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API,
@@ -6,10 +7,21 @@ const service = axios.create({
 });
 
 // 請求攔截器
-service.interceptors.request.use(config => {
-    config.headers.icode = 'CAA36288C5993B52';
-    return config;
-});
+service.interceptors.request.use(
+    config => {
+        // 接口校驗碼
+        config.headers.icode = 'CAA36288C5993B52';
+        // token
+        if (store.getters.token) {
+            config.headers.Authorization = `Bearer ${store.getters.token}`;
+        }
+
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
 
 //響應攔截器
 service.interceptors.response.use(

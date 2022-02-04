@@ -5,12 +5,16 @@ import store from '@/store';
 const whitlelist = ['/login'];
 
 // 路由前置守衛
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
     // 若用戶已登錄 不允許進入login
     if (store.getters.token) {
         if (to.path === '/login') {
             next('/');
         } else {
+            // 判斷用戶資料是否存在,不存在則觸發獲取用戶訊息
+            if (!store.getters.hasUserInfo) {
+                await store.dispatch('user/getUserInfo');
+            }
             next();
         }
     } else {
