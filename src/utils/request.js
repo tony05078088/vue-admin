@@ -45,6 +45,10 @@ service.interceptors.response.use(
     },
     // 請求失敗處理
     error => {
+        // token 過期
+        if (error.response && error.response.data && error.response.data.code === 401) {
+            store.dispatch('user/logout');
+        }
         ElMessage.error(error.message);
         return Promise.reject(error);
     }
