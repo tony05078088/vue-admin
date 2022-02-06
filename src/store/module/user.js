@@ -2,6 +2,7 @@ import { login, getUserInfo } from '@/api/sys';
 import { setItem, getItem, removeAllItem } from '@/utils/storage';
 import router from '@/router/index';
 import { TOKEN } from '@/constant/';
+import { setTimeStamp } from '@/utils/auth';
 import md5 from 'md5';
 export default {
     namespaced: true,
@@ -31,6 +32,8 @@ export default {
                         this.commit('user/setToken', data.token);
                         // 跳轉
                         router.push('/');
+                        // 保存登錄時間
+                        setTimeStamp();
                         resolve();
                     })
                     .catch(err => {
