@@ -1,29 +1,37 @@
 <template>
     <el-menu
+        :default-active="activeMenu"
         :uniqueOpened="true"
-        background-color="#545c64"
-        text-color="#fff"
-        default-active="2"
-        active-text-color="#ffd04b"
+        :background-color="$store.getters.cssVar.menuBg"
+        :text-color="$store.getters.cssVar.menuText"
+        :active-text-color="$store.getters.cssVar.menuActiveText"
+        router
     >
-        <!-- 子集menu -->
-        <el-sub-menu index="1">
-            <template #title>
-                <i class="el-icon-location"></i>
-                <span>導航一</span>
-            </template>
-            <el-menu-item index="1-1">選項1</el-menu-item>
-            <el-menu-item index="1-2">選項2</el-menu-item>
-        </el-sub-menu>
-
-        <!-- 具體menu -->
-        <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <template #title>導航四</template>
-        </el-menu-item>
+        <leftbar-item v-for="item in routes" :key="item.path" :route="item"></leftbar-item>
     </el-menu>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { generateRoutes, filterRoutes } from '@/utils/route';
+import LeftbarItem from './LeftbarItem.vue';
+const router = useRouter();
+
+const routes = computed(() => {
+    const filteredRoutes = filterRoutes(router.getRoutes());
+    console.log(filteredRoutes);
+    return generateRoutes(filteredRoutes);
+});
+
+//默認激活
+const route = useRoute();
+const activeMenu = computed(() => {
+    const { path } = route;
+    return path;
+});
+
+console.log(router);
+</script>
 
 <style lang="scss" scoped></style>
