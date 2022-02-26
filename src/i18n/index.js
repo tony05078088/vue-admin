@@ -1,15 +1,16 @@
 import { createI18n } from 'vue-i18n';
-
+import zhLocale from './lang/zh';
+import enLocale from './lang/en';
 // 創建數據源
 const messages = {
     en: {
         msg: {
-            test: 'hello world'
+            ...enLocale
         }
     },
     zh: {
         msg: {
-            test: '哈囉 世界'
+            ...zhLocale
         }
     }
 };
