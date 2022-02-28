@@ -7,7 +7,7 @@
         </div>
         <template #dropdown>
             <el-dropdown-menu>
-                <el-dropdown-item :disabled="language === 'zh'" command="zh">中文</el-dropdown-item>
+                <el-dropdown-item :disabled="language === 'tw'" command="tw">中文</el-dropdown-item>
                 <el-dropdown-item :disabled="language === 'en'" command="en"
                     >English</el-dropdown-item
                 >
@@ -43,7 +43,7 @@ const handleSetLanguage = lang => {
     // 修改vuex中保存的language
     store.commit('app/setLanguage', lang);
     // 提示
-    ElMessage.success('更新成功');
+    ElMessage.success(i18n.t('msg.toast.switchLangSuccess'));
 };
 </script>
 

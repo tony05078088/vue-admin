@@ -21,7 +21,6 @@ const router = useRouter();
 
 const routes = computed(() => {
     const filteredRoutes = filterRoutes(router.getRoutes());
-    console.log(filteredRoutes);
     return generateRoutes(filteredRoutes);
 });
 
@@ -31,8 +30,6 @@ const activeMenu = computed(() => {
     const { path } = route;
     return path;
 });
-
-console.log(router);
 </script>
 
 <style lang="scss" scoped></style>

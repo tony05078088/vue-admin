@@ -1,6 +1,7 @@
 import { createI18n } from 'vue-i18n';
 import zhLocale from './lang/zh';
 import enLocale from './lang/en';
+import twLocale from './lang/tw';
 // 創建數據源
 const messages = {
     en: {
@@ -12,10 +13,15 @@ const messages = {
         msg: {
             ...zhLocale
         }
+    },
+    tw: {
+        msg: {
+            ...twLocale
+        }
     }
 };
 // 創建locale語言變數
-const locale = 'zh';
+const locale = 'tw';
 
 //初始化i18n實例
 const i18n = createI18n({

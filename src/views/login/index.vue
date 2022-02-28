@@ -2,7 +2,8 @@
     <div class="login-container">
         <el-form class="login-form" ref="loginFormRef" :model="loginForm" :rules="loginRules">
             <div class="title-container">
-                <h3 class="title">使用者登錄</h3>
+                <h3 class="title">{{ $t('msg.login.title') }}</h3>
+                <lang-select class="lang-select" />
             </div>
             <!-- username -->
             <el-form-item prop="username">
@@ -42,16 +43,20 @@
                 style="width: 100%; margin-bottom: 30px"
                 :loading="loading"
                 @click="handleLogin"
-                >登錄</el-button
+                >{{ $t('msg.login.loginBtn') }}</el-button
             >
+            <div class="tips" v-html="$t('msg.login.desc')"></div>
         </el-form>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { validatePassword } from './rules';
 import { useStore } from 'vuex';
+import { watchSwitchLang } from '@/utils/i18n';
+import langSelect from '@/components/LangSelect/index';
 //數據源
 const loginForm = ref({
     username: 'super-admin',
@@ -59,12 +64,16 @@ const loginForm = ref({
 });
 
 // 驗證規則
+const i18n = useI18n();
 const loginRules = ref({
     username: [
         {
             required: true,
             trigger: 'blur',
-            message: '帳號為必填'
+            // message: i18n.t('msg.login.usernameRule')
+            message: computed(() => {
+                return i18n.t('msg.login.usernameRule');
+            })
         }
     ],
     password: [
@@ -74,6 +83,10 @@ const loginRules = ref({
             validator: validatePassword()
         }
     ]
+});
+
+watchSwitchLang(() => {
+    loginFormRef.value.validate();
 });
 
 //處理密碼框文字顯示
@@ -155,6 +168,11 @@ $cursor: #fff;
                 caret-color: $cursor;
             }
         }
+        .tips {
+            font-size: 16px;
+            color: white;
+            line-height: 24px;
+        }
     }
 
     .svg-container {
@@ -173,6 +191,16 @@ $cursor: #fff;
             margin: 0px auto 40px auto;
             text-align: center;
             font-weight: bold;
+        }
+        .lang-select {
+            position: absolute;
+            top: 4px;
+            right: 0;
+            background-color: #fff;
+            font-size: 22px;
+            padding: 4px;
+            border-radius: 4px;
+            cursor: pointer;
         }
     }
 
