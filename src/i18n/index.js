@@ -1,4 +1,5 @@
 import { createI18n } from 'vue-i18n';
+import store from '@/store';
 import zhLocale from './lang/zh';
 import enLocale from './lang/en';
 import twLocale from './lang/tw';
@@ -20,8 +21,14 @@ const messages = {
         }
     }
 };
+
 // 創建locale語言變數
-const locale = 'tw';
+//const locale = 'tw';
+
+//緩存當前lang
+function getLanguage() {
+    return store && store.getters && store.getters.language;
+}
 
 //初始化i18n實例
 const i18n = createI18n({
@@ -29,7 +36,7 @@ const i18n = createI18n({
     legacy: false,
     // 全局使用t函數
     globalInjection: true,
-    locale,
+    locale: getLanguage(),
     messages
 });
 

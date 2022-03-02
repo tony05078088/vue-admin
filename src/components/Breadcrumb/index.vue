@@ -4,11 +4,11 @@
             <el-breadcrumb-item v-for="(item, index) in BreadCrumbData" :key="item.path">
                 <!-- 不可點擊 -->
                 <span class="no-redirect" v-if="index === BreadCrumbData.length - 1">
-                    {{ item.meta.title }}
+                    {{ generateTitle(item.meta.title) }}
                 </span>
                 <!-- 可點擊 -->
                 <span class="redirect" v-else @click="onLinkClick(item)">
-                    {{ item.meta.title }}
+                    {{ generateTitle(item.meta.title) }}
                 </span>
             </el-breadcrumb-item>
         </transition-group>
@@ -19,6 +19,7 @@
 import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import { generateTitle } from '@/utils/i18n';
 
 // 生成數組數據
 const BreadCrumbData = ref([]);

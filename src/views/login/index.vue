@@ -3,7 +3,7 @@
         <el-form class="login-form" ref="loginFormRef" :model="loginForm" :rules="loginRules">
             <div class="title-container">
                 <h3 class="title">{{ $t('msg.login.title') }}</h3>
-                <lang-select class="lang-select" />
+                <lang-select class="lang-select" effect="light" />
             </div>
             <!-- username -->
             <el-form-item prop="username">
@@ -70,7 +70,6 @@ const loginRules = ref({
         {
             required: true,
             trigger: 'blur',
-            // message: i18n.t('msg.login.usernameRule')
             message: computed(() => {
                 return i18n.t('msg.login.usernameRule');
             })
