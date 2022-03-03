@@ -5,6 +5,7 @@
         <breadcrumb class="breadcrumb-container" />
         <div class="right-menu">
             <lang-select class="right-menu-item hover-effect"></lang-select>
+            <theme-picker class="right-menu-item hover-effect"></theme-picker>
             <!-- 頭像 -->
             <el-dropdown class="avatar-container" trigger="click">
                 <div class="avatar-wrapper">
@@ -36,6 +37,7 @@ import { useStore } from 'vuex';
 import hamburger from '@/components/hamburger/';
 import Breadcrumb from '@/components/Breadcrumb/';
 import LangSelect from '@/components/LangSelect/';
+import ThemePicker from '@/components/ThemeSelect/';
 const store = useStore();
 const logout = () => {
     store.dispatch('user/logout');

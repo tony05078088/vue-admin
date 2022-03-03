@@ -27,7 +27,8 @@ const messages = {
 
 //緩存當前lang
 function getLanguage() {
-    return store && store.getters && store.getters.language;
+    // console.log(store && store.getters && store.getters.language);
+    return store?.getters?.language;
 }
 
 //初始化i18n實例
