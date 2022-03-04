@@ -1,10 +1,8 @@
 <template>
     <el-dialog title="提示" :model-value="modelValue" @close="closed" width="22%">
         <div class="center">
-            <p class="title">
-                {{ $t('msg.theme.themeColorChange') }}
-            </p>
-            <el-color-picker v-model="mColor" :predefine="predefineColors"> </el-color-picker>
+            <p class="title">{{ $t('msg.theme.themeColorChange') }}</p>
+            <el-color-picker v-model="mColor" :predefine="predefineColors"></el-color-picker>
         </div>
         <template #footer>
             <span class="dialog-footer">
@@ -20,6 +18,8 @@
 <script setup>
 import { defineProps, defineEmits, ref } from 'vue';
 import { useStore } from 'vuex';
+import { generateNewStyle, writeNewStyle } from '@/utils/theme';
+
 defineProps({
     modelValue: {
         type: Boolean,
@@ -57,11 +57,18 @@ const closed = () => {
 };
 
 // 確定
-// 1.修改主題色
-// 2.保存最新的主題色
 // 3.關閉dialog
 
 const confirm = async () => {
+    // 1.1獲取主題色
+    const newStyleText = await generateNewStyle(mColor.value);
+    console.log(newStyleText);
+    // 1.2寫入最新的主題色
+    writeNewStyle(newStyleText);
+
+    //2.保存最新主題色
+    store.commit('theme/setMainColor', mColor.value);
+
     // 3.關閉dialog
     closed();
 };

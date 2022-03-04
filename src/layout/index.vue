@@ -4,7 +4,10 @@
         :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']"
     >
         <!-- 左側menu -->
-        <Sidebar class="sidebar-container" :style="{ backgroundColor: variables.menuBg }"></Sidebar>
+        <Sidebar
+            class="sidebar-container"
+            :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
+        ></Sidebar>
         <div class="main-container">
             <div class="fixed-header">
                 <!-- 頂部 navbar -->
@@ -20,7 +23,7 @@
 import Topbar from './components/Navbar.vue';
 import Sidebar from './components/Sidebar';
 import AppMain from './components/AppMain';
-import variables from '@/styles/variables.scss';
+// import variables from '@/styles/variables.scss';
 </script>
 
 <style scoped lang="scss">
