@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import SelectColor from '../ThemePicker/components/SelectColor.vue';
+import SelectColor from './components/SelectColor.vue';
 import { ref } from 'vue';
 
 const selectColorVisible = ref(false);

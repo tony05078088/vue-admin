@@ -1,5 +1,10 @@
 <template>
-    <el-dialog title="提示" :model-value="modelValue" @close="closed" width="22%">
+    <el-dialog
+        :title="$t('msg.universal.title')"
+        :model-value="modelValue"
+        @close="closed"
+        width="22%"
+    >
         <div class="center">
             <p class="title">{{ $t('msg.theme.themeColorChange') }}</p>
             <el-color-picker v-model="mColor" :predefine="predefineColors"></el-color-picker>
@@ -53,6 +58,7 @@ const mColor = ref(store.getters.mainColor);
 
 // 關閉
 const closed = () => {
+    // update是事件的名字 modelValue是要修改的值
     emits('update:modelValue', false);
 };
 
@@ -62,7 +68,6 @@ const closed = () => {
 const confirm = async () => {
     // 1.1獲取主題色
     const newStyleText = await generateNewStyle(mColor.value);
-    console.log(newStyleText);
     // 1.2寫入最新的主題色
     writeNewStyle(newStyleText);
 

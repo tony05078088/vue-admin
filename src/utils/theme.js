@@ -17,6 +17,8 @@ export const writeNewStyle = elNewStyle => {
 };
 // 根據主色值,生成最新的樣式表
 export const generateNewStyle = async primaryColor => {
+    // 根據主色生成色值表
+    // 獲取當前element-plus 預設樣式表 並把需要替換的色值打上標記
     const colors = generateColors(primaryColor);
     let cssText = await getOriginalStyle();
 
@@ -69,6 +71,7 @@ const getStyleTemplate = data => {
     // 根據預設值為要替換的顏色值上標記
     Object.keys(colorMap).forEach(key => {
         const value = colorMap[key];
+        // 把key 替換成value ==> 即是3a8ee6 換成shade-1
         data = data.replace(new RegExp(key, 'ig'), value);
     });
     return data;
