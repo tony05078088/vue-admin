@@ -4,6 +4,7 @@
         <hamburger class="hamburger-container" />
         <breadcrumb class="breadcrumb-container" />
         <div class="right-menu">
+            <header-search class="right-menu-item hover-effect" />
             <full-screen class="right-menu-item hover-effect" />
             <lang-select class="right-menu-item hover-effect"></lang-select>
             <theme-select class="right-menu-item hover-effect"></theme-select>
@@ -40,6 +41,7 @@ import Breadcrumb from '@/components/Breadcrumb/';
 import LangSelect from '@/components/LangSelect/';
 import ThemeSelect from '@/components/ThemeSelect/';
 import FullScreen from '@/components/FullScreen/';
+import HeaderSearch from '@/components/HeaderSearch/';
 const store = useStore();
 const logout = () => {
     store.dispatch('user/logout');
