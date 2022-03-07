@@ -4,6 +4,7 @@
         <hamburger class="hamburger-container" />
         <breadcrumb class="breadcrumb-container" />
         <div class="right-menu">
+            <full-screen class="right-menu-item hover-effect" />
             <lang-select class="right-menu-item hover-effect"></lang-select>
             <theme-select class="right-menu-item hover-effect"></theme-select>
             <!-- 頭像 -->
@@ -38,6 +39,7 @@ import hamburger from '@/components/hamburger/';
 import Breadcrumb from '@/components/Breadcrumb/';
 import LangSelect from '@/components/LangSelect/';
 import ThemeSelect from '@/components/ThemeSelect/';
+import FullScreen from '@/components/FullScreen/';
 const store = useStore();
 const logout = () => {
     store.dispatch('user/logout');
@@ -63,7 +65,7 @@ const logout = () => {
                 margin-top: 5px;
                 position: relative;
                 .el-avatar {
-                    --el-avatar-background-color: none;
+                    --el-avatar-bg-color: none;
                     margin-right: 12px;
                 }
             }

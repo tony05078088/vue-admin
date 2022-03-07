@@ -18,6 +18,12 @@ const locale = computed(() => (store.getters.language === 'zh' ? zhCn : en));
 generateNewStyle(store.getters.mainColor).then(newStyleText => {
     writeNewStyle(newStyleText);
 });
+
+// const newStyleText = await generateNewStyle(store.getters.mainColor);
+// console.log(newStyleText);
+// if (newStyleText) {
+//     writeNewStyle(newStyleText);
+// }
 </script>
 
 <style lang="scss" scope></style>
