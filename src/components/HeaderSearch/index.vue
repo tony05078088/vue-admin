@@ -28,37 +28,43 @@ import { ref, computed } from 'vue';
 import { filterRoutes } from '@/utils/route';
 import { generateRoutes } from './FuseData';
 import { useRouter } from 'vue-router';
+import { watchSwitchLang } from '@/utils/i18n';
 import Fuse from 'fuse.js';
 // 數據源
 const router = useRouter();
-const searchPool = computed(() => {
+let searchPool = computed(() => {
     const filteredRoutes = filterRoutes(router.getRoutes());
     console.log(generateRoutes(filteredRoutes));
     return generateRoutes(filteredRoutes);
 });
 
 // 模糊搜索相關 1.數據源 2.配置
-const fuse = new Fuse(searchPool.value, {
-    // 是否按優先級排序
-    shouldSort: true,
-    // 匹配長度超過這個值的才會被認為是匹配
-    minMatchCharLength: 1,
-    // 將被搜索的鍵列表,支援加權搜索,在字串和對象數組中搜索
-    // name:搜索的鍵
-    // weight:對應權重
-    keys: [
-        {
-            name: 'title',
-            weight: 0.7
-        },
-        {
-            name: 'path',
-            weight: 0.3
-        }
-    ]
-});
-console.log(searchPool);
-console.log(fuse);
+let fuse;
+const initFuse = searchPool => {
+    fuse = new Fuse(searchPool.value, {
+        // 是否按優先級排序
+        shouldSort: true,
+        //   匹配算法放棄的時機 閥值0.0 需要完美匹配(字母,位置) 閥值1.0將匹配任何內容
+        threshold: 0.4,
+
+        // 匹配長度超過這個值的才會被認為是匹配
+        minMatchCharLength: 1,
+        // 將被搜索的鍵列表,支援加權搜索,在字串和對象數組中搜索
+        // name:搜索的鍵
+        // weight:對應權重
+        keys: [
+            {
+                name: 'title',
+                weight: 0.7
+            },
+            {
+                name: 'path',
+                weight: 0.3
+            }
+        ]
+    });
+};
+initFuse(searchPool);
 
 // 控制search展示
 const isShow = ref(false);
@@ -80,6 +86,15 @@ const querySearch = query => {
 const onSelectChange = val => {
     router.push(val.path);
 };
+
+watchSwitchLang(() => {
+    searchPool = computed(() => {
+        const filteredRoutes = filterRoutes(router.getRoutes());
+        return generateRoutes(filteredRoutes);
+    });
+
+    initFuse(searchPool);
+});
 </script>
 
 <style lang="scss" scoped>

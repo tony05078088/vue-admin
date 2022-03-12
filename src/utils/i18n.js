@@ -2,10 +2,13 @@ import { watch } from 'vue';
 import i18n from '@/i18n';
 import store from '../store';
 
+// 監聽語言變化,同時執行cb
 export function watchSwitchLang(...cbs) {
     watch(
+        // 觀察語言
         () => store.getters.language,
         () => {
+            //回調函數
             cbs.forEach(cb => cb(store.getters.language));
         }
     );
