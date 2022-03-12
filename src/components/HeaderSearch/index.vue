@@ -7,16 +7,17 @@
             class="header-search-select"
             v-model="search"
             filterable
+            remote
             default-first-option
-            :remote-method="querySearch"
             placeholder="search"
+            :remote-method="querySearch"
             @change="onSelectChange"
         >
             <el-option
-                v-for="option in 5"
-                :key="option"
-                :label="option"
-                :value="option"
+                v-for="option in searchOptions"
+                :key="option.item.path"
+                :label="option.item.title.join(' > ')"
+                :value="option.item"
             ></el-option>
         </el-select>
     </div>
@@ -24,7 +25,8 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { filterRoutes, generateRoutes } from '@/utils/route';
+import { filterRoutes } from '@/utils/route';
+import { generateRoutes } from './FuseData';
 import { useRouter } from 'vue-router';
 import Fuse from 'fuse.js';
 // 數據源
@@ -36,7 +38,7 @@ const searchPool = computed(() => {
 });
 
 // 模糊搜索相關 1.數據源 2.配置
-const fuse = new Fuse(searchPool, {
+const fuse = new Fuse(searchPool.value, {
     // 是否按優先級排序
     shouldSort: true,
     // 匹配長度超過這個值的才會被認為是匹配
@@ -66,12 +68,17 @@ const onShowClick = () => {
 // search相關
 
 // 搜索方法
-const querySearch = () => {
-    console.log('querySearch');
+const searchOptions = ref([]);
+const querySearch = query => {
+    if (query !== '') {
+        searchOptions.value = fuse.search(query);
+    } else {
+        searchOptions.value = [];
+    }
 };
 // 選中option的callback
-const onSelectChange = () => {
-    console.log('change');
+const onSelectChange = val => {
+    router.push(val.path);
 };
 </script>
 
