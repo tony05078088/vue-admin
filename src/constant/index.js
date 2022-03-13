@@ -16,3 +16,6 @@ export const MAIN_COLOR = 'mainColor';
 
 // 預設顏色值
 export const DEFAULT_COLOR = '#409eff';
+
+// tags
+export const TAGS_VIEW = 'tagsView';
