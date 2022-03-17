@@ -111,7 +111,7 @@ const publicRoutes = [
     },
     {
         path: '/',
-        reditect: '/profile',
+        redirect: '/profile',
         component: () => import('@/layout/index'),
         children: [
             //個人中心

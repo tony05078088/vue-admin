@@ -23,6 +23,7 @@ export const generateRoutes = (routes, basePath = '/', prefixTitle = []) => {
         const re = /.*\/:.*/;
         if (route.meta?.title && !re.exec(route.path)) {
             const i18nTitle = i18n.global.t(`msg.route.${route.meta.title}`);
+            console.log(i18nTitle);
             data.title = [...data.title, i18nTitle];
             res.push(data);
         }

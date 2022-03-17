@@ -25,6 +25,11 @@ export default {
                 state.tagsViewList.push(tag);
                 setItem(TAGS_VIEW, state.tagsViewList);
             }
+        },
+        // 為指定的tag修改title
+        changeTagsView(state, { index, tag }) {
+            state.tagsViewList[index] = tag;
+            setItem(TAGS_VIEW, state.tagsViewList);
         }
     }
 };

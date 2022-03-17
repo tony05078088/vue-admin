@@ -1,6 +1,5 @@
 <template>
     <div class="profile">
-        <!-- {{ $t('msg.test') }} -->
         <el-row>
             <el-button type="primary">Default</el-button>
             <el-button type="success">Success</el-button>
@@ -12,3 +11,9 @@
 </template>
 
 <script setup></script>
+
+<style scoped>
+.profile {
+    padding-top: 5%;
+}
+</style>

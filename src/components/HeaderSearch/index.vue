@@ -34,7 +34,6 @@ import Fuse from 'fuse.js';
 const router = useRouter();
 let searchPool = computed(() => {
     const filteredRoutes = filterRoutes(router.getRoutes());
-    console.log(generateRoutes(filteredRoutes));
     return generateRoutes(filteredRoutes);
 });
 

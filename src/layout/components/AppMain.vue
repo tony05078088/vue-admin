@@ -9,7 +9,7 @@ import { watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { isTags } from '@/utils/tag';
 import { useStore } from 'vuex';
-import { generateTitle } from '@/utils/i18n';
+import { generateTitle, watchSwitchLang } from '@/utils/i18n';
 
 // 生成title
 const getTitle = route => {
@@ -17,6 +17,7 @@ const getTitle = route => {
     if (!route.meta) {
         const pathArr = route.path.split('/');
         title = pathArr[pathArr.length - 1];
+        console.log(title);
     } else {
         title = generateTitle(route.meta.title);
     }
@@ -32,6 +33,7 @@ watch(
         //    並非所有路由都需要保存
         if (!isTags(to.path)) return;
         const { fullPath, meta, name, params, path, query } = to;
+        console.log(to.fullPath);
         store.commit('app/addTagsViewList', {
             fullPath,
             meta,
@@ -39,11 +41,23 @@ watch(
             params,
             path,
             query,
-            title: getTitle(to)
+            title: getTitle(to) || ''
         });
     },
     { immediate: true }
 );
+
+watchSwitchLang(() => {
+    store.getters.tagsViewList.forEach((route, index) => {
+        store.commit('app/changeTagsView', {
+            index,
+            tag: {
+                ...route,
+                title: getTitle(route)
+            }
+        });
+    });
+});
 </script>
 
 <style lang="scss" scoped>
