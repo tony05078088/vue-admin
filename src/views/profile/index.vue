@@ -12,8 +12,4 @@
 
 <script setup></script>
 
-<style scoped>
-.profile {
-    padding-top: 5%;
-}
-</style>
+<style scoped></style>
