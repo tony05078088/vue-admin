@@ -10,6 +10,7 @@
             v-for="(tag, index) in $store.getters.tagsViewList"
             :key="tag.fullPath"
             :to="{ path: tag.fullPath }"
+            @contextmenu.prevent="openMenu($event, index)"
         >
             {{ tag.title }}
             <i
@@ -18,11 +19,16 @@
                 @click.prevent.stop="onCloseClick(index)"
             />
         </router-link>
+
+        <context-menu v-show="visible" :style="menuStyle" :index="selectIndex" />
     </div>
 </template>
 
 <script setup>
+import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+import ContextMenu from './ContextMenu.vue';
 const route = useRoute();
 
 /**
@@ -35,7 +41,40 @@ const isActive = tag => {
 /**
  * 關閉tag的點擊事件
  */
-// const onCloseClick = index => {};
+const store = useStore();
+const onCloseClick = index => {
+    store.commit('app/removeTagsView', {
+        type: 'index',
+        index
+    });
+};
+
+// 滑鼠右鍵
+const visible = ref(false);
+const menuStyle = ref({
+    left: 0,
+    top: 0
+});
+const selectIndex = ref(0);
+const openMenu = (e, index) => {
+    const { x, y } = e;
+    menuStyle.value.left = x + 'px';
+    menuStyle.value.top = y + 'px';
+    selectIndex.value = index;
+    visible.value = true;
+};
+
+const closeMenu = () => {
+    visible.value = false;
+};
+
+watch(visible, val => {
+    if (val) {
+        document.body.addEventListener('click', closeMenu);
+    } else {
+        document.body.removeEventListener('click', closeMenu);
+    }
+});
 </script>
 
 <style lang="scss" scoped>
