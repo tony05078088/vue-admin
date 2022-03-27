@@ -12,7 +12,6 @@ import axios from 'axios';
 export const writeNewStyle = elNewStyle => {
     const style = document.createElement('style');
     style.innerText = elNewStyle;
-    console.log(style);
     document.head.appendChild(style);
 };
 // 根據主色值,生成最新的樣式表

@@ -7,7 +7,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
-import { ElConfigProvider } from 'element-plus';
+// import { ElConfigProvider } from 'element-plus';
 import { generateNewStyle, writeNewStyle } from '@/utils/theme';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
 import en from 'element-plus/es/locale/lang/en';

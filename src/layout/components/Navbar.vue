@@ -2,12 +2,13 @@
     <div class="navbar">
         <!-- 漢堡 -->
         <hamburger class="hamburger-container" />
-        <breadcrumb class="breadcrumb-container" />
+        <breadcrumb id="guide-breadcrumb" class="breadcrumb-container" />
         <div class="right-menu">
             <header-search class="right-menu-item hover-effect" />
             <full-screen class="right-menu-item hover-effect" />
             <lang-select class="right-menu-item hover-effect"></lang-select>
             <theme-select class="right-menu-item hover-effect"></theme-select>
+            <guide class="right-menu-item hover-effect"></guide>
             <!-- 頭像 -->
             <el-dropdown class="avatar-container" trigger="click">
                 <div class="avatar-wrapper">
@@ -42,6 +43,7 @@ import LangSelect from '@/components/LangSelect/';
 import ThemeSelect from '@/components/ThemeSelect/';
 import FullScreen from '@/components/FullScreen/';
 import HeaderSearch from '@/components/HeaderSearch/';
+import Guide from '@/components/Guide';
 const store = useStore();
 const logout = () => {
     store.dispatch('user/logout');

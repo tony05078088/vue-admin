@@ -1,6 +1,6 @@
 <template>
     <div class="header-search" :class="{ show: isShow }" @click="onShowClick">
-        <svg-icon class-name="search-icon" icon="search"></svg-icon>
+        <svg-icon class-name="search-icon" icon="search" @click.stop="onShowClick"></svg-icon>
 
         <el-select
             ref="headerSearchSelectRef"
@@ -71,7 +71,7 @@ const onShowClick = () => {
     isShow.value = !isShow.value;
 };
 // search相關
-
+const search = ref('');
 // 搜索方法
 const searchOptions = ref([]);
 const querySearch = query => {
