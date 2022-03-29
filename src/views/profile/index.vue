@@ -2,19 +2,19 @@
     <div class="my-container">
         <el-row>
             <el-col :span="6">
-                <project-card class="user-card"></project-card>
+                <project-card class="user-card" :features="featureData"></project-card>
             </el-col>
             <el-col :span="18">
                 <el-card>
                     <el-tabs v-model="activeName">
                         <el-tab-pane :label="$t('msg.profile.feature')" name="feature">
-                            <feature />
+                            <Feature />
                         </el-tab-pane>
                         <el-tab-pane :label="$t('msg.profile.chapter')" name="chapter">
-                            <chapter />
+                            <Chapter />
                         </el-tab-pane>
                         <el-tab-pane :label="$t('msg.profile.author')" name="author">
-                            <author />
+                            <Author />
                         </el-tab-pane>
                     </el-tabs>
                 </el-card>
@@ -28,9 +28,17 @@ import projectCard from './components/ProjectCard.vue';
 import Feature from './components/Feature.vue';
 import Author from './components/Author.vue';
 import Chapter from './components/Chapter.vue';
+import { feature } from '@/api/user';
 import { ref } from 'vue';
 
 const activeName = ref('feature');
+
+const featureData = ref([]);
+const getFeature = async () => {
+    featureData.value = await feature();
+};
+
+getFeature();
 </script>
 
 <style scoped lang="scss">
