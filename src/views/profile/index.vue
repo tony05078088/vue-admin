@@ -30,6 +30,7 @@ import Author from './components/Author.vue';
 import Chapter from './components/Chapter.vue';
 import { feature } from '@/api/user';
 import { ref } from 'vue';
+import { watchSwitchLang } from '@/utils/i18n';
 
 const activeName = ref('feature');
 
@@ -39,6 +40,9 @@ const getFeature = async () => {
 };
 
 getFeature();
+
+// 監聽語言切換
+watchSwitchLang(getFeature);
 </script>
 
 <style scoped lang="scss">
