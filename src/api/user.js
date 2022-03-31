@@ -6,3 +6,11 @@ export const feature = () => {
         url: '/user/feature'
     });
 };
+
+// 獲取章節功能
+
+export const chapter = () => {
+    return request({
+        url: '/user/chapter'
+    });
+};
