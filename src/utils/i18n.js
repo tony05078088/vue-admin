@@ -9,6 +9,7 @@ export function watchSwitchLang(...cbs) {
         () => store.getters.language,
         () => {
             //回調函數
+            console.log(cbs);
             cbs.forEach(cb => cb(store.getters.language));
         }
     );

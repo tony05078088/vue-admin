@@ -2,7 +2,7 @@
     <div class="author">
         <div class="header">
             <pan-thumb
-                image="https://img4.sycdn.imooc.com/61110c2b0001152907400741-140-140.jpg"
+                image="https://media-exp1.licdn.com/dms/image/C5603AQEGN42SRIzvqg/profile-displayphoto-shrink_100_100/0/1517284981028?e=2147483647&v=beta&t=7LG_pACnfsFVPsta_d3sXEhiAEBlpcMt5IbGAAMipi8"
                 height="60px"
                 width="60px"
             >
