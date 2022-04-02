@@ -1,7 +1,9 @@
 <template>
-    <div>下載</div>
+    <UploadExcel />
 </template>
 
-<script setup></script>
+<script setup>
+import UploadExcel from '@/components/UploadExcel';
+</script>
 
 <style scoped lang="scss"></style>
