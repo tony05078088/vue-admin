@@ -29,9 +29,10 @@
 
 <script setup>
 import { Upload } from '@element-plus/icons-vue';
-import { getHeaderRow } from './utils';
+import { getHeaderRow, isExcel } from './utils';
 import { ref, defineProps } from 'vue';
 import XLSX from 'xlsx';
+import { ElMessage } from 'element-plus';
 
 const props = defineProps({
     // 上傳前的callback
@@ -41,7 +42,6 @@ const props = defineProps({
 });
 
 // 點擊上傳觸發
-
 const loading = ref(false);
 const excelUploadInput = ref(null);
 
@@ -54,6 +54,27 @@ const handleChange = e => {
     if (!rawwFile) return;
     console.log(rawwFile);
     uploaded(rawwFile);
+};
+
+// 拖曳上傳
+const handleDrop = e => {
+    //   上傳中
+    if (loading.value) return;
+    const files = e.dataTransfer.files;
+    if (files.length !== 1) {
+        ElMessage.error('必須有一份文件');
+        return;
+    }
+    const rawwFile = files[0];
+    //  判斷是否為excel檔案
+    if (!isExcel(rawwFile)) {
+        ElMessage.error('文件格式必須是.xlsx,.xls,.csv格式');
+        return;
+    }
+    uploaded(rawwFile);
+};
+const handleDragover = e => {
+    e.dataTransfer.dropEffect = 'copy';
 };
 
 // 觸發上傳事件
