@@ -11,7 +11,7 @@ const service = axios.create({
 service.interceptors.request.use(
     config => {
         // 接口校驗碼
-        config.headers.icode = 'E6ACD789A0D9D685';
+        config.headers.icode = '2277A04AB710062F';
         // token
         if (store.getters.token) {
             if (isCheckTimeout()) {
