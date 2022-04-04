@@ -82,7 +82,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onActivated } from 'vue';
 import { getUserManageList } from '@/api/user-manage';
 import { watchSwitchLang } from '@/utils/i18n';
 import { useRouter } from 'vue-router';
@@ -105,9 +105,17 @@ const getListData = async () => {
 
 getListData();
 watchSwitchLang(getListData);
+// 當user-manage組件緩存被重新載入時,調用此hooks
+onActivated(getListData);
 
-const handleSizeChange = () => {};
-const handleCurrentChange = () => {};
+const handleSizeChange = currentSize => {
+    size.value = currentSize;
+    getListData();
+};
+const handleCurrentChange = currentPage => {
+    page.value = currentPage;
+    getListData();
+};
 
 // excel導入
 const router = useRouter();

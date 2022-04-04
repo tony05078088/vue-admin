@@ -4,7 +4,7 @@
 
 <script setup>
 import UploadExcel from '@/components/UploadExcel';
-import { USER_RELATIONS } from './utils';
+import { USER_RELATIONS, formatDate } from './utils';
 import { ElMessage } from 'element-plus';
 import { getUserBatchImport } from '@/api/user-manage';
 import { useI18n } from 'vue-i18n';
@@ -17,6 +17,7 @@ const i18n = useI18n();
 const router = useRouter();
 const onSuccess = async ({ header, result }) => {
     const updateData = generateData(result);
+
     await getUserBatchImport(updateData);
     ElMessage.success(result.length + i18n.t('msg.excel.importSuccess'));
     router.push('/user/manage');
@@ -28,6 +29,11 @@ const generateData = results => {
     results.forEach(item => {
         const userInfo = {};
         Object.keys(item).forEach(key => {
+            if (USER_RELATIONS[key] === 'openTime') {
+                console.log(item[key]);
+                userInfo[USER_RELATIONS[key]] = formatDate(item[key]);
+                return;
+            }
             userInfo[USER_RELATIONS[key]] = item[key];
         });
         arr.push(userInfo);
