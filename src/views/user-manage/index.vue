@@ -56,10 +56,12 @@
 
                 <!-- 操作 -->
                 <el-table-column :label="$t('msg.excel.action')" fixed="right" width="300">
-                    <template #default>
+                    <template #default="{ row }">
                         <el-button type="primary">{{ $t('msg.excel.show') }}</el-button>
                         <el-button type="info">{{ $t('msg.excel.showRole') }}</el-button>
-                        <el-button type="primary">{{ $t('msg.excel.remove') }}</el-button>
+                        <el-button type="primary" @click="removeUser(row)">{{
+                            $t('msg.excel.remove')
+                        }}</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -81,8 +83,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import { getUserManageList } from '@/api/user-manage';
+import { getUserManageList, deleteUser } from '@/api/user-manage';
 import { watchSwitchLang } from '@/utils/i18n';
+import { ElMessage, ElMessageBox } from 'element-plus';
+import { useI18n } from 'vue-i18n';
 
 // 數據相關
 const tableData = ref([]);
@@ -105,6 +109,22 @@ watchSwitchLang(getListData);
 
 const handleSizeChange = () => {};
 const handleCurrentChange = () => {};
+
+// 刪除用戶
+const i18n = useI18n();
+const removeUser = row => {
+    ElMessageBox.confirm(
+        i18n.t('msg.excel.dialogTitle1') + row.username + i18n.t('msg.excel.dialogTitle2'),
+        {
+            type: 'warning'
+        }
+    ).then(async () => {
+        await deleteUser(row._id);
+        ElMessage.success(i18n.t('msg.excel.removeSuccess'));
+        // 重新渲染數據
+        getListData();
+    });
+};
 </script>
 
 <style scoped lang="scss">

@@ -8,3 +8,10 @@ export const getUserManageList = data => {
         data
     });
 };
+
+// 刪除指定用戶
+export const deleteUser = id => {
+    return request({
+        url: `/user-manage/detele/${id}`
+    });
+};
