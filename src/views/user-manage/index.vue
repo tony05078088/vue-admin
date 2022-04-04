@@ -2,7 +2,9 @@
     <div class="user-manage-container">
         <el-card class="header">
             <div>
-                <el-button type="primary">{{ $t('msg.excel.importExcel') }}</el-button>
+                <el-button type="primary" @click="onImportExcel">{{
+                    $t('msg.excel.importExcel')
+                }}</el-button>
                 <el-button type="success">{{ $t('msg.excel.exportExcel') }}</el-button>
             </div>
         </el-card>
@@ -82,11 +84,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import { getUserManageList, deleteUser } from '@/api/user-manage';
 import { watchSwitchLang } from '@/utils/i18n';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { useI18n } from 'vue-i18n';
+import { ref, onActivated } from 'vue';
+import { useRouter } from 'vue-router';
 
 // 數據相關
 const tableData = ref([]);
@@ -106,9 +109,8 @@ const getListData = async () => {
 
 getListData();
 watchSwitchLang(getListData);
-
-const handleSizeChange = () => {};
-const handleCurrentChange = () => {};
+// 當user-manage組件緩存被重新載入時,調用此hooks
+onActivated(getListData);
 
 // 刪除用戶
 const i18n = useI18n();
@@ -124,6 +126,20 @@ const removeUser = row => {
         // 重新渲染數據
         getListData();
     });
+};
+const handleSizeChange = currentSize => {
+    size.value = currentSize;
+    getListData();
+};
+const handleCurrentChange = currentPage => {
+    page.value = currentPage;
+    getListData();
+};
+
+// excel導入
+const router = useRouter();
+const onImportExcel = () => {
+    router.push('/user/import');
 };
 </script>
 
