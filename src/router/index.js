@@ -42,6 +42,8 @@ const privateRoutes = [
                 path: '/user/info/:id',
                 name: 'userInfo',
                 component: () => import('@/views/user-info/index'),
+                // 當props設置為true時,route.params將被設置為組件prＦops
+                props: true,
                 meta: {
                     title: 'userInfo'
                 }

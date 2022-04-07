@@ -24,3 +24,10 @@ export const deleteUser = id => {
         url: `/user-manage/detele/${id}`
     });
 };
+
+// 獲取用戶資料
+export const UserDetail = id => {
+    return request({
+        url: `/user-manage/detail/${id}`
+    });
+};

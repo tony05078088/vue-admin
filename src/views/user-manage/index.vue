@@ -59,7 +59,9 @@
                 <!-- 操作 -->
                 <el-table-column :label="$t('msg.excel.action')" fixed="right" width="300">
                     <template #default="{ row }">
-                        <el-button type="primary">{{ $t('msg.excel.show') }}</el-button>
+                        <el-button type="primary" @click="onShowClick(row._id)">{{
+                            $t('msg.excel.show')
+                        }}</el-button>
                         <el-button type="info">{{ $t('msg.excel.showRole') }}</el-button>
                         <el-button type="primary" @click="removeUser(row)">{{
                             $t('msg.excel.remove')
@@ -111,6 +113,12 @@ getListData();
 watchSwitchLang(getListData);
 // 當user-manage組件緩存被重新載入時,調用此hooks
 onActivated(getListData);
+
+// 查看用戶資料
+
+const onShowClick = id => {
+    router.push(`/user/info/${id}`);
+};
 
 // 刪除用戶
 const i18n = useI18n();
