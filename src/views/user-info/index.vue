@@ -1,10 +1,12 @@
 <template>
     <div class="user-info-container">
         <el-card class="print-box">
-            <el-button type="primary">{{ $t('msg.userInfo.print') }}</el-button>
+            <el-button type="primary" :loading="printLoading" v-print="printObj">{{
+                $t('msg.userInfo.print')
+            }}</el-button>
         </el-card>
         <el-card>
-            <div class="user-info-box">
+            <div class="user-info-box" id="userInfoBox">
                 <!-- 標題 -->
                 <h2 class="title">{{ $t('msg.userInfo.title') }}</h2>
                 <!-- header -->
@@ -99,6 +101,24 @@ const getUserDetail = async () => {
 
 getUserDetail();
 watchSwitchLang(getUserDetail);
+
+// 列印
+const printLoading = ref(false);
+
+const printObj = {
+    // 列印區域
+    id: 'userInfoBox',
+    // 列印標題
+    popTitle: 'vue-element-admin',
+    // 列印前
+    beforeOpenCallback() {
+        printLoading.value = true;
+    },
+    // 執行列印
+    openCallback() {
+        printLoading.value = false;
+    }
+};
 </script>
 
 <style lang="scss" scoped>
