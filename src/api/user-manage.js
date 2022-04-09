@@ -31,3 +31,10 @@ export const UserDetail = id => {
         url: `/user-manage/detail/${id}`
     });
 };
+
+// 獲取所有用戶列表
+export const getUserManageAllList = () => {
+    return request({
+        url: '/user-manage/all-list'
+    });
+};
