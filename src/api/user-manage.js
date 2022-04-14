@@ -38,3 +38,21 @@ export const getUserManageAllList = () => {
         url: '/user-manage/all-list'
     });
 };
+
+// 獲取指定用戶角色
+export const userRoles = id => {
+    return request({
+        url: `/user-manage/role/${id}`
+    });
+};
+
+// 為用戶分配身份
+export const updateRole = (id, roles) => {
+    return request({
+        url: `/user-manage/update-role/${id}`,
+        method: 'POST',
+        data: {
+            roles
+        }
+    });
+};

@@ -64,7 +64,9 @@
                         <el-button type="primary" @click="onShowClick(row._id)">{{
                             $t('msg.excel.show')
                         }}</el-button>
-                        <el-button type="info">{{ $t('msg.excel.showRole') }}</el-button>
+                        <el-button type="info" @click="onShowRole(row)">{{
+                            $t('msg.excel.showRole')
+                        }}</el-button>
                         <el-button type="primary" @click="removeUser(row)">{{
                             $t('msg.excel.remove')
                         }}</el-button>
@@ -86,6 +88,8 @@
         </el-card>
 
         <export-to-excel v-model="exportToExcelVisible"> </export-to-excel>
+        <roles-dialog v-model="roleDialogVisible" :userId="selectUserId" @updateRole="getListData">
+        </roles-dialog>
     </div>
 </template>
 
@@ -94,9 +98,10 @@ import { getUserManageList, deleteUser } from '@/api/user-manage';
 import { watchSwitchLang } from '@/utils/i18n';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { useI18n } from 'vue-i18n';
-import { ref, onActivated } from 'vue';
+import { ref, onActivated, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import ExportToExcel from './components/Exprt2Excel.vue';
+import RolesDialog from './components/roles.vue';
 
 // 數據相關
 const tableData = ref([]);
@@ -124,6 +129,21 @@ onActivated(getListData);
 const onShowClick = id => {
     router.push(`/user/info/${id}`);
 };
+
+// 為員工分配角色
+const roleDialogVisible = ref(false);
+const selectUserId = ref('');
+const onShowRole = row => {
+    roleDialogVisible.value = true;
+    selectUserId.value = row._id;
+};
+
+// 保證每次打開對話框都會重新獲取數據
+watch(roleDialogVisible, val => {
+    if (!val) {
+        selectUserId.value = '';
+    }
+});
 
 // 刪除用戶
 const i18n = useI18n();

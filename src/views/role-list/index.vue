@@ -8,7 +8,7 @@
                 <el-table-column :label="$t('msg.role.name')" prop="title"> </el-table-column>
                 <el-table-column :label="$t('msg.role.desc')" prop="describe"> </el-table-column>
                 <el-table-column :label="$t('msg.role.action')" width="200">
-                    <el-button type="primary" size="mini">
+                    <el-button type="primary" size="small">
                         {{ $t('msg.role.assignPermissions') }}
                     </el-button>
                 </el-table-column>
