@@ -4,7 +4,7 @@ import { isCheckTimeout } from '@/utils/auth';
 import { ElMessage } from 'element-plus';
 const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API,
-    timeout: 5000
+    timeout: 10000
 });
 
 // 請求攔截器
