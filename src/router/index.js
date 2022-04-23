@@ -5,6 +5,7 @@ import RoleList from './modules/RoleList';
 import PermissionList from './modules/PermissionList';
 import Article from './modules/Article';
 import ArticleCreate from './modules/ArticleCreate';
+import store from '@/store';
 
 // 私有路由表
 export const privateRoutes = [UserManage, RoleList, PermissionList, Article, ArticleCreate];
@@ -50,5 +51,22 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes: publicRoutes
 });
+
+/**
+ * 初始化路由表
+ */
+
+export function resetRouter() {
+    if (
+        store.getters.userInfo &&
+        store.getters.userInfo.permission &&
+        store.getters.userInfo.permission.menus
+    ) {
+        const menus = store.getters.userInfo.permission.menus;
+        menus.forEach(menu => {
+            router.removeRoute(menu);
+        });
+    }
+}
 
 export default router;
