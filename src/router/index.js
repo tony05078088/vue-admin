@@ -9,7 +9,6 @@ import store from '@/store';
 
 // 私有路由表
 export const privateRoutes = [UserManage, RoleList, PermissionList, Article, ArticleCreate];
-console.log(privateRoutes);
 // 公有路由表
 export const publicRoutes = [
     {
