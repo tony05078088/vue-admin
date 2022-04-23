@@ -21,7 +21,6 @@ export default {
         filterRoutes(context, menus) {
             // 篩選之後,獲取到的需要通過addRoute 進行添加的路由表數組
             const routes = [];
-            console.log('123');
 
             menus.forEach(key => {
                 routes.push(...privateRoutes.filter(item => item.name === key));
