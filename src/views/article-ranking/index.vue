@@ -27,10 +27,10 @@
                         {{ $filters.relativeTime(row.publicDate) }}
                     </template>
                     <template v-else-if="item.prop === 'action'" #default="{ row }">
-                        <el-button type="primary" size="mini" @click="onShow(row)">
+                        <el-button type="primary" size="small" @click="onShow(row)">
                             {{ $t('msg.article.show') }}
                         </el-button>
-                        <el-button type="danger" size="mini" @click="onRemove(row)">
+                        <el-button type="danger" size="small" @click="onRemove(row)">
                             {{ $t('msg.article.remove') }}
                         </el-button>
                     </template>
