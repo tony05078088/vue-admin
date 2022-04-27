@@ -51,10 +51,11 @@
 </template>
 
 <script setup>
-import { ref, onActivated } from 'vue';
+import { ref, onActivated, onMounted } from 'vue';
 import { getArticleList } from '@/api/article';
 import { watchSwitchLang } from '@/utils/i18n';
 import { dynamicData, selectDynamicLabel, tableColumns } from './dynamic/index';
+import { tableRef, initSortable } from './sortrable/index';
 // 數據相關
 const tableData = ref([]);
 const page = ref(1);
@@ -74,6 +75,11 @@ getListData();
 
 watchSwitchLang(getListData);
 onActivated(getListData);
+
+// 初始化 sortable
+onMounted(() => {
+    initSortable();
+});
 
 // 點擊查看
 const onShow = row => {
@@ -121,5 +127,10 @@ const handleCurrentChange = currentPage => {
         text-align: center;
     }
 }
+
+::v-deep .sortable-ghost {
+    opacity: 0.6;
+    color: #fff;
+    background: #304156;
+}
 </style>
->
