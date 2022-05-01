@@ -19,3 +19,9 @@ export const articleSort = data => {
         data
     });
 };
+
+export const deleteArticle = articleId => {
+    return request({
+        url: `/article/delete/${articleId}`
+    });
+};
