@@ -58,6 +58,7 @@ import { dynamicData, selectDynamicLabel, tableColumns } from './dynamic/index';
 import { tableRef, initSortable } from './sortrable/index';
 import { ElMessageBox, ElMessage } from 'element-plus';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 // 數據相關
 const tableData = ref([]);
 const page = ref(1);
@@ -84,8 +85,9 @@ onMounted(() => {
 });
 
 // 點擊查看
+const router = useRouter();
 const onShow = row => {
-    console.log(row);
+    router.push(`/article/${row._id}`);
 };
 
 // 點擊刪除
