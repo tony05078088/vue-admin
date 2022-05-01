@@ -78,7 +78,7 @@ onActivated(getListData);
 
 // 初始化 sortable
 onMounted(() => {
-    initSortable();
+    initSortable(tableData, getListData);
 });
 
 // 點擊查看
