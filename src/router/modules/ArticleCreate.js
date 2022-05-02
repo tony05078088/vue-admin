@@ -1,13 +1,13 @@
 import layout from '@/layout';
 
 export default {
-    path: '/user',
+    path: '/article',
     component: layout,
-    redirect: '/user/manage',
+    redirect: '/article/ranking',
     name: 'articleCreate',
     meta: {
-        title: 'user',
-        icon: 'personnel'
+        title: 'article',
+        icon: 'article'
     },
     children: [
         {
