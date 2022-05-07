@@ -11,18 +11,21 @@
 </template>
 
 <script setup>
-import { onMounted, defineProps, defineEmits } from 'vue';
+import { onMounted, defineProps, defineEmits, watch } from 'vue';
 import MKEditor from '@toast-ui/editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import '@toast-ui/editor/dist/i18n/zh-cn';
 import { useStore } from 'vuex';
 import { watchSwitchLang } from '@/utils/i18n';
-import { commitArticle } from './common';
+import { commitArticle, editArticle } from './common';
 
 const props = defineProps({
     title: {
         required: true,
         type: String
+    },
+    detail: {
+        type: Object
     }
 });
 
@@ -62,13 +65,35 @@ watchSwitchLang(() => {
 });
 
 const submitCommit = async () => {
-    await commitArticle({
-        title: props.title,
-        content: mkEditor.getHTML()
-    });
+    if (props.detail && props.detail._id) {
+        await editArticle({
+            id: props.detail._id,
+            title: props.title,
+            content: mkEditor.getHTML()
+        });
+    } else {
+        await commitArticle({
+            title: props.title,
+            content: mkEditor.getHTML()
+        });
+    }
+
     mkEditor.reset();
     emits('onASuccess');
 };
+
+// 編輯相關
+watch(
+    () => props.detail,
+    val => {
+        if (val && val.content) {
+            mkEditor.setHTML(val.content);
+        }
+    },
+    {
+        immediately: true
+    }
+);
 </script>
 
 <style lang="scss" scoped>

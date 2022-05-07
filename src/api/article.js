@@ -39,3 +39,11 @@ export const articleDetail = articleId => {
         url: `/article/${articleId}`
     });
 };
+// 編輯文章
+export const editorArticle = data => {
+    return request({
+        url: `/article/edit`,
+        method: 'POST',
+        data
+    });
+};
