@@ -1,24 +1,36 @@
 <template>
     <div class="article-ranking-container">
+        <el-card class="header">
+            <div class="dynamic-box">
+                <span>{{ $t('msg.article.dynamicTitle') }}</span>
+                <el-checkbox-group v-model="selectDynamicLabel">
+                    <el-checkbox
+                        v-for="(item, index) in dynamicData"
+                        :label="item.label"
+                        :key="index"
+                    >
+                        {{ item.label }}
+                    </el-checkbox>
+                </el-checkbox-group>
+            </div>
+        </el-card>
+
         <el-card>
             <el-table ref="tableRef" :data="tableData" border>
                 <el-table-column
-                    :label="$t('msg.article.ranking')"
-                    prop="ranking"
-                ></el-table-column>
-                <el-table-column :label="$t('msg.article.title')" prop="title"></el-table-column>
-                <el-table-column :label="$t('msg.article.author')" prop="author"></el-table-column>
-                <el-table-column
-                    :label="$t('msg.article.publicDate')"
-                    prop="publicDate"
-                ></el-table-column>
-                <el-table-column :label="$t('msg.article.desc')" prop="desc"></el-table-column>
-                <el-table-column :label="$t('msg.article.action')">
-                    <template #default="{ row }">
-                        <el-button type="primary" size="mini" @click="onShow(row)">{{
-                            $t('msg.article.show')
-                        }}</el-button>
-                        <el-button type="danger" size="mini" @click="onRemove(row)">
+                    v-for="(item, index) in tableColumns"
+                    :key="index"
+                    :prop="item.prop"
+                    :label="item.label"
+                >
+                    <template v-if="item.prop === 'publicDate'" #default="{ row }">
+                        {{ $filters.relativeTime(row.publicDate) }}
+                    </template>
+                    <template v-else-if="item.prop === 'action'" #default="{ row }">
+                        <el-button type="primary" size="small" @click="onShow(row)">
+                            {{ $t('msg.article.show') }}
+                        </el-button>
+                        <el-button type="danger" size="small" @click="onRemove(row)">
                             {{ $t('msg.article.remove') }}
                         </el-button>
                     </template>
@@ -39,9 +51,14 @@
 </template>
 
 <script setup>
-import { ref, onActivated } from 'vue';
-import { getArticleList } from '@/api/article';
+import { ref, onActivated, onMounted } from 'vue';
+import { getArticleList, deleteArticle } from '@/api/article';
 import { watchSwitchLang } from '@/utils/i18n';
+import { dynamicData, selectDynamicLabel, tableColumns } from './dynamic/index';
+import { tableRef, initSortable } from './sortrable/index';
+import { ElMessageBox, ElMessage } from 'element-plus';
+import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 // 數據相關
 const tableData = ref([]);
 const page = ref(1);
@@ -62,14 +79,30 @@ getListData();
 watchSwitchLang(getListData);
 onActivated(getListData);
 
+// 初始化 sortable
+onMounted(() => {
+    initSortable(tableData, getListData);
+});
+
 // 點擊查看
+const router = useRouter();
 const onShow = row => {
-    console.log(row);
+    router.push(`/article/${row._id}`);
 };
 
 // 點擊刪除
+const i18n = useI18n();
 const onRemove = row => {
-    console.log(row);
+    ElMessageBox.confirm(
+        i18n.t('msg.article.dialogTitle1') + row.title + i18n.t('msg.article.dialogTitle2'),
+        {
+            type: 'warning'
+        }
+    ).then(async () => {
+        await deleteArticle(row._id);
+        ElMessage.success(i18n.t('msg.article.removeSuccess'));
+        getListData();
+    });
 };
 
 // size 改變
@@ -108,5 +141,10 @@ const handleCurrentChange = currentPage => {
         text-align: center;
     }
 }
+
+::v-deep .sortable-ghost {
+    opacity: 0.6;
+    color: #fff;
+    background: #304156;
+}
 </style>
->
