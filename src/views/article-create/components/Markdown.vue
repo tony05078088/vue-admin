@@ -3,18 +3,31 @@
         <!-- 渲染區 -->
         <div id="markdown-box"></div>
         <div class="bottom">
-            <el-button type="primary" @click="submit">{{ $t('msg.article.commit') }}</el-button>
+            <el-button type="primary" @click="submitCommit">{{
+                $t('msg.article.commit')
+            }}</el-button>
         </div>
     </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, defineProps, defineEmits } from 'vue';
 import MKEditor from '@toast-ui/editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import '@toast-ui/editor/dist/i18n/zh-cn';
 import { useStore } from 'vuex';
 import { watchSwitchLang } from '@/utils/i18n';
+import { commitArticle } from './common';
+
+const props = defineProps({
+    title: {
+        required: true,
+        type: String
+    }
+});
+
+const emits = defineEmits(['onASuccess']);
+
 // Editor 實例
 let el;
 let mkEditor;
@@ -47,6 +60,15 @@ watchSwitchLang(() => {
     initEditor();
     mkEditor.setHTML(htmlStr);
 });
+
+const submitCommit = async () => {
+    await commitArticle({
+        title: props.title,
+        content: mkEditor.getHTML()
+    });
+    mkEditor.reset();
+    emits('onASuccess');
+};
 </script>
 
 <style lang="scss" scoped>

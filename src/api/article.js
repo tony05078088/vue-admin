@@ -8,3 +8,11 @@ export const getArticleList = data => {
         params: data
     });
 };
+// 創建文章
+export const createArticle = data => {
+    return request({
+        url: '/article/create',
+        method: 'POST',
+        data
+    });
+};
