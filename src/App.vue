@@ -8,8 +8,8 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { generateNewStyle, writeNewStyle } from '@/utils/theme';
-import zhCn from 'element-plus/es/locale/lang/zh-cn';
-import en from 'element-plus/es/locale/lang/en';
+import zhCn from 'element-plus/lib/locale/lang/zh-cn';
+import en from 'element-plus/lib/locale/lang/en';
 import { watchSwitchLang } from '@/utils/i18n';
 
 const store = useStore();

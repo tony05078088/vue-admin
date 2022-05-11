@@ -49,5 +49,13 @@ module.exports = {
             })
             // 結束
             .end();
+
+        // 新增規則,處理element-plus 2 錯誤
+        config.module
+            .rule('element-plus-2')
+            .test(/\.mjs$/)
+            .type('javascript/auto')
+            .include.add(/node_modules/)
+            .end();
     }
 };
