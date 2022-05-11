@@ -45,6 +45,7 @@ export default {
         themeChange: '主题更换'
     },
     universal: {
+        title: '提示',
         confirm: '確認',
         cancel: '取消'
     },
@@ -89,10 +90,10 @@ export default {
         feature: '功能',
         chapter: '章節',
         author: '作者',
-        name: 'Sunday',
+        name: 'William',
         job: '前端工程師',
         Introduction:
-            '高级技术专家，曾就职于国内一线互联网公司，统筹过的多个大型项目用户数已过千万级。致力于研究大前端技术，多次受邀参加国内前端技术分享会，如：2018 年 Google 中国技术分享会。'
+            '自學前端,曾當過國內外業務,銀行員,目前就任前端工程師,曾在博弈產業,金融業,半導體業擔任前端工程師,致力於研究軟體技術,目前潛心學習前後端及DevOps'
     },
     userInfo: {
         print: '列印',

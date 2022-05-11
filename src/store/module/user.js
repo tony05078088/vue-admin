@@ -1,13 +1,13 @@
 import { login, getUserInfo } from '@/api/sys';
 import { setItem, getItem, removeAllItem } from '@/utils/storage';
-import router from '@/router/index';
+import router, { resetRouter } from '@/router/index';
 import { TOKEN } from '@/constant/';
 import { setTimeStamp } from '@/utils/auth';
 import md5 from 'md5';
 export default {
     namespaced: true,
     state: () => ({
-        token: getItem() || '',
+        token: getItem(TOKEN) || '',
         userInfo: {}
     }),
     mutations: {
@@ -49,6 +49,7 @@ export default {
         },
         // 退出登錄
         logout() {
+            resetRouter();
             this.commit('user/setToken', '');
             this.commit('user/setUserInfo', {});
             removeAllItem();

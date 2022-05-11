@@ -4,14 +4,14 @@ import { isCheckTimeout } from '@/utils/auth';
 import { ElMessage } from 'element-plus';
 const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API,
-    timeout: 5000
+    timeout: 10000
 });
 
 // 請求攔截器
 service.interceptors.request.use(
     config => {
         // 接口校驗碼
-        config.headers.icode = 'CAA36288C5993B52';
+        config.headers.icode = '8D30F2F80CBA8370';
         // token
         if (store.getters.token) {
             if (isCheckTimeout()) {
@@ -21,7 +21,8 @@ service.interceptors.request.use(
             }
             config.headers.Authorization = `Bearer ${store.getters.token}`;
         }
-
+        // 配置接口國際化
+        config.headers['Accept-Language'] = store.getters.language;
         return config;
     },
     error => {

@@ -4,11 +4,17 @@
         :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']"
     >
         <!-- 左側menu -->
-        <Sidebar class="sidebar-container" :style="{ backgroundColor: variables.menuBg }"></Sidebar>
+        <Sidebar
+            id="guide-sidebar"
+            class="sidebar-container"
+            :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
+        ></Sidebar>
         <div class="main-container">
             <div class="fixed-header">
                 <!-- 頂部 navbar -->
                 <Topbar />
+                <!-- tags -->
+                <Tags-view id="guide-tags" />
             </div>
             <!-- 內容區 -->
             <app-main></app-main>
@@ -20,7 +26,8 @@
 import Topbar from './components/Navbar.vue';
 import Sidebar from './components/Sidebar';
 import AppMain from './components/AppMain';
-import variables from '@/styles/variables.scss';
+import TagsView from '@/components/TagsView';
+// import variables from '@/styles/variables.scss';
 </script>
 
 <style scoped lang="scss">

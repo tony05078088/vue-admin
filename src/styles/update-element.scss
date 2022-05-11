@@ -1,0 +1,10 @@
+// 處理input白/藍邊
+.el-input__inner {
+    box-shadow: none !important;
+    --el-select-input-focus-border-color: none !important;
+}
+
+// 處理圖片灰色底
+.el-avatar {
+    --el-avatar-bg-color: none !important;
+}

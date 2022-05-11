@@ -1,11 +1,11 @@
 <template>
     <el-menu
-        :collapse="!$store.getters.sidebarOpened"
         :default-active="activeMenu"
-        :uniqueOpened="true"
+        :collapse="!$store.getters.sidebarOpened"
         :background-color="$store.getters.cssVar.menuBg"
         :text-color="$store.getters.cssVar.menuText"
         :active-text-color="$store.getters.cssVar.menuActiveText"
+        :uniqueOpened="true"
         router
     >
         <leftbar-item v-for="item in routes" :key="item.path" :route="item"></leftbar-item>

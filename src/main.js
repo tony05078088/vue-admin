@@ -12,7 +12,15 @@ import installIcons from '@/icons';
 //導入路由鑑權
 import './permission';
 
+// 全局屬性
+import installFilter from '@/filter';
+
+// 指令
+import installDirectives from '@/directives';
+
 const app = createApp(App);
 installIcons(app);
 installElementPlus(app);
+installFilter(app);
+installDirectives(app);
 app.use(store).use(router).use(i18n).mount('#app');
