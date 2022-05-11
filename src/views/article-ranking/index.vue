@@ -15,10 +15,10 @@
                 <el-table-column :label="$t('msg.article.desc')" prop="desc"></el-table-column>
                 <el-table-column :label="$t('msg.article.action')">
                     <template #default="{ row }">
-                        <el-button type="primary" size="mini" @click="onShow(row)">{{
+                        <el-button type="primary" size="small" @click="onShow(row)">{{
                             $t('msg.article.show')
                         }}</el-button>
-                        <el-button type="danger" size="mini" @click="onRemove(row)">
+                        <el-button type="danger" size="small" @click="onRemove(row)">
                             {{ $t('msg.article.remove') }}
                         </el-button>
                     </template>

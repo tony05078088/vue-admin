@@ -10,7 +10,7 @@
                 <el-table-column :label="$t('msg.role.action')" width="200" #default="{ row }">
                     <el-button
                         type="primary"
-                        size="mini"
+                        size="small"
                         @click="onDistribute(row)"
                         v-permission="['distributePermission']"
                     >
