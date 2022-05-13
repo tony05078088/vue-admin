@@ -1,5 +1,16 @@
 # vue-admin
 
+
+## Project Introduction
+依照Vue 3.2 全新技術和語法,重寫Vue-element-admin
+
+架構:
+1.標準化下大廠代碼風格規範
+2.登入架構方案
+3.Layout架構解決方案
+4.依權限登入方案
+5.Excel輸入輸出處理方案
+
 ## Project setup
 ```
 npm install
