@@ -7,7 +7,7 @@
             </div>
             <div class="title-amount">
                 &yen;
-                <span>{{ data.allAmount }}</span>
+                <span ref="titleAmountTarget">{{ data.allAmount }}</span>
             </div>
         </div>
     </div>
@@ -17,7 +17,7 @@
             {{ $t('msg.chart.trendDataTadayAdded') }}
         </div>
         <div class="item-amount">
-            <span class="item-amount-number">
+            <span ref="todayAddedTarget" class="item-amount-number">
                 {{ data.tadayAdded }}
             </span>
             {{ $t('msg.chart.unit') }}
@@ -29,7 +29,7 @@
             {{ $t('msg.chart.trendDataTadayExpend') }}
         </div>
         <div class="item-amount">
-            <span class="item-amount-number">
+            <span ref="todayExpendTarget" class="item-amount-number">
                 {{ data.tadaySub }}
             </span>
             {{ $t('msg.chart.unit') }}
@@ -41,7 +41,7 @@
             {{ $t('msg.chart.trendDataTadayBalance') }}
         </div>
         <div class="item-amount">
-            <span class="item-amount-number">
+            <span ref="todayBalanceTarget" class="item-amount-number">
                 {{ data.tadayAmount }}
             </span>
             {{ $t('msg.chart.unit') }}
@@ -50,12 +50,39 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
-defineProps({
+import { defineProps, ref, onMounted } from 'vue';
+import { CountUp } from 'countup.js';
+const props = defineProps({
     data: {
         type: Object,
         required: true
     }
+});
+
+// 本月累計收益
+const titleAmountTarget = ref(null);
+// 今日新增收益
+const todayAddedTarget = ref(null);
+// 今日新增支出
+const todayExpendTarget = ref(null);
+// 今日結餘
+const todayBalanceTarget = ref(null);
+
+onMounted(() => {
+    const options = {
+        // 小數點位數:
+        decimalPlaces: 2,
+        // 持續時間:
+        duration: 1.5
+    };
+    // 本月累計收益
+    new CountUp(titleAmountTarget.value, props.data.allAmount, options).start();
+    // 本月新增收益
+    new CountUp(todayAddedTarget.value, props.data.tadayAdded, options).start();
+    // 本月新增支出
+    new CountUp(todayExpendTarget.value, props.data.tadaySub, options).start();
+    // 今日結餘
+    new CountUp(todayBalanceTarget.value, props.data.tadayAmount, options).start();
 });
 </script>
 
