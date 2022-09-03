@@ -30,6 +30,15 @@ export const publicRoutes = [
                     icon: 'personnel'
                 }
             },
+            {
+                path: '/chart',
+                name: 'chart',
+                component: () => import('@/views/chart/index'),
+                meta: {
+                    title: 'chart',
+                    icon: 'chart'
+                }
+            },
             // 404
             {
                 path: '/404',

@@ -20,6 +20,7 @@ export default {
     },
     route: {
         profile: '個人資訊',
+        chart: '數據可視化',
         user: '用戶',
         excelImport: 'Excel導入',
         userManage: '員工管理',
