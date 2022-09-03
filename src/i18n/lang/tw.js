@@ -179,5 +179,28 @@ export default {
         createSuccess: '文章創建成功',
         editorSuccess: '文章修改成功',
         sortSuccess: '文章排名修改成功'
+    },
+    chart: {
+        trendDataTitle: '本月累計收益（萬元）',
+        trendDataTadayAdded: '今日新增收益',
+        trendDataTadayExpend: '今日新增支出',
+        trendDataTadayBalance: '今日結餘',
+        income: '收益',
+        expend: '支出',
+        balance: '結餘',
+        monthIncome: '月累計收益',
+        dayIncome: '日收益曲線',
+        unit: '萬元',
+        pieChartTitle: '區域行銷圖示',
+        cloudChartTitle: '慕课 logo 文档云',
+        bmapChartTitle: '營收業績圖示（地圖不支援國際化）',
+        tadayReceivable: '今日收款',
+        tadayBalance: '今日結餘',
+        sheetProvince: '省份',
+        sheetCity: '城市',
+        sheetCoverage: '覆蓋率',
+        sheetReceivable: '今日應收',
+        sheetActual: '今日實收',
+        sheetBalance: '今日結餘'
     }
 };

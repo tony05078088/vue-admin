@@ -179,5 +179,28 @@ export default {
         createSuccess: 'The article was created successfully',
         editorSuccess: 'Article modified successfully',
         sortSuccess: 'Article ranking modified successfully'
+    },
+    chart: {
+        trendDataTitle: 'Cumulative income of this month (ten thousand yuan)',
+        trendDataTadayAdded: 'Income Today',
+        trendDataTadayExpend: 'New expenditure today',
+        trendDataTadayBalance: 'Balance Today',
+        income: 'Income',
+        expend: 'Expenditure',
+        balance: 'Balance',
+        monthIncome: 'Monthly cumulative income',
+        dayIncome: 'Daily return curve',
+        unit: 'w',
+        pieChartTitle: 'Regional marketing diagram',
+        cloudChartTitle: 'imooc Logo document Cloud',
+        bmapChartTitle: 'Revenue performance diagram（Map does not support internationalization）',
+        tadayReceivable: 'Receivable today',
+        tadayBalance: 'Balance Today',
+        sheetProvince: 'Province',
+        sheetCity: 'City',
+        sheetCoverage: 'Coverage rate',
+        sheetReceivable: 'Receivables today',
+        sheetActual: 'Actual today',
+        sheetBalance: 'Balance today'
     }
 };
