@@ -7,7 +7,10 @@
 //    導入echarts
 import { onMounted, ref, defineProps } from 'vue';
 import * as echarts from 'echarts';
+import { useI18n } from 'vue-i18n';
+import { watchSwitchLang } from '@/utils/i18n';
 
+const i18n = useI18n();
 const props = defineProps({
     data: {
         type: Object,
@@ -73,7 +76,7 @@ const renderChart = () => {
         },
         // 圖例配置
         legend: {
-            data: ['月累計收益', '日收益曲線'],
+            data: [i18n.t('msg.chart.monthIncome'), i18n.t('msg.chart.dayIncome')],
             // 圖例展示位置
             right: 0
         },
@@ -110,7 +113,7 @@ const renderChart = () => {
             },
             // 刻度上展現的單位
             axisLabel: {
-                formatter: '{value}萬元'
+                formatter: `{value} ${i18n.t('msg.chart.unit')}`
             }
         },
         // 圖表配置
@@ -119,12 +122,12 @@ const renderChart = () => {
                 //柱狀圖
                 type: 'bar',
                 // 圖表名字對應圖例
-                name: '月累計收益',
+                name: i18n.t('msg.chart.monthIncome'),
                 barWidth: 20,
                 // 提示框的展示內容
                 tooltip: {
                     valueFormattor: function (value) {
-                        return value + '萬元';
+                        return value + i18n.t('msg.chart.unit');
                     }
                 },
                 data: props.data.monthAmountList.map(el => el.amount)
@@ -137,12 +140,12 @@ const renderChart = () => {
                 // 平滑曲線
                 smooth: true,
                 // 圖表名字對應圖例
-                name: '日收益曲線',
+                name: i18n.t('msg.chart.dayIncome'),
 
                 // 提示框的展示內容
                 tooltip: {
                     valueFormattor: function (value) {
-                        return value + '萬元';
+                        return value + i18n.t('msg.chart.unit');
                     }
                 },
                 data: props.data.dailyCurve.map(el => el.amount)
@@ -153,6 +156,8 @@ const renderChart = () => {
     // 利用mychart.setOptions方法配置options
     myChart.setOption(options);
 };
+
+watchSwitchLang(renderChart);
 </script>
 
 <style scoped lang="scss">
