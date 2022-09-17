@@ -7,3 +7,11 @@ export const getChartTrend = () => {
         url: '/chart/trend'
     });
 };
+
+// 日曆圖示數據
+
+export const getChartCalendar = () => {
+    return request({
+        url: '/chart/calendar'
+    });
+};
