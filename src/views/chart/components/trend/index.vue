@@ -7,7 +7,7 @@
             </el-col>
             <el-col :span="18">
                 <!-- 圖表部分 -->
-                <trend-chart />
+                <trend-chart :data="ChartData" />
             </el-col>
         </el-row>
     </el-card>
