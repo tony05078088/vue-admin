@@ -9,6 +9,7 @@ import { onMounted, ref } from 'vue';
 import { getChartTimeAmount } from '@/api/chart';
 import * as echarts from 'echarts';
 import { useI18n } from 'vue-i18n';
+import emitter from '@/utils/eventHub';
 
 const i18n = useI18n();
 const data = ref([]);
@@ -118,6 +119,11 @@ const renderChart = () => {
 
     mCharts.setOption(options);
 };
+// 日曆圖連動
+emitter.on('calendarChange', val => {
+    console.log(val);
+    getData(val);
+});
 </script>
 
 <style scoped lang="scss">

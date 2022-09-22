@@ -16,8 +16,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { getChartCalendar } from '@/api/chart';
+import emitter from '@/utils/eventHub';
 const currentDate = ref(new Date());
 
 // 獲取數據
@@ -63,6 +64,12 @@ const calendatItemBGClass = day => {
     }
     return '';
 };
+
+// 監聽日期變化
+watch(currentDate, val => {
+    console.log(val);
+    emitter.emit('calendarChange', val);
+});
 </script>
 
 <style scoped lang="scss">
