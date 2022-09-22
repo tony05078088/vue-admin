@@ -23,7 +23,6 @@ const ChartData = ref({});
 const getChartTrendData = async () => {
     const res = await getChartTrend();
     ChartData.value = res;
-    console.log(res);
 };
 
 getChartTrendData();

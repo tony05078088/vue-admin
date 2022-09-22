@@ -15,3 +15,13 @@ export const getChartCalendar = () => {
         url: '/chart/calendar'
     });
 };
+
+// 指定日期時段柱形數據
+export const getChartTimeAmount = date => {
+    return request({
+        url: '/chart/time/amount',
+        params: {
+            date
+        }
+    });
+};
