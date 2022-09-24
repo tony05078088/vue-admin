@@ -31,3 +31,10 @@ export const getChartPie = () => {
         url: '/chart/pie'
     });
 };
+
+// 文檔雲圖
+export const getChartWordCloud = () => {
+    return request({
+        url: '/chart/wordcloud'
+    });
+};
