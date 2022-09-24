@@ -25,3 +25,9 @@ export const getChartTimeAmount = date => {
         }
     });
 };
+// 圓餅圖
+export const getChartPie = () => {
+    return request({
+        url: '/chart/pie'
+    });
+};
