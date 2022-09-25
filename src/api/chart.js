@@ -38,3 +38,10 @@ export const getChartWordCloud = () => {
         url: '/chart/wordcloud'
     });
 };
+
+// 地圖可視化
+export const getChartMap = () => {
+    return request({
+        url: '/chart/bmap'
+    });
+};
