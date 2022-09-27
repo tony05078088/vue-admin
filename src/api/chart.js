@@ -45,3 +45,10 @@ export const getChartMap = () => {
         url: '/chart/bmap'
     });
 };
+
+// 獲取區域數據
+export const getChartRegions = () => {
+    return request({
+        url: '/chart/regions'
+    });
+};
