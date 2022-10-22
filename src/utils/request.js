@@ -23,6 +23,7 @@ service.interceptors.request.use(
         }
         // 配置接口國際化
         config.headers['Accept-Language'] = store.getters.language;
+        console.log(config);
         return config;
     },
     error => {

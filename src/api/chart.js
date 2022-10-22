@@ -52,3 +52,13 @@ export const getChartRegions = () => {
         url: '/chart/regions'
     });
 };
+
+// 表格數據
+export const getChartSheets = regionId => {
+    return request({
+        url: '/chart/sheets',
+        params: {
+            regionId
+        }
+    });
+};
