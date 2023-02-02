@@ -2,7 +2,7 @@
 
 
 ## Project Introduction
-依照Vue 3.2 全新技術和語法,重寫Vue-element-admin
+依照Vue 3.2 全新技術和語法,構建權限管理以及數據可視化之後台管理系統
 
 架構:
 <br/>
